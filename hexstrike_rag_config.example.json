@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "hexstrike-rag": {
+      "command": "python",
+      "args": ["<PROJECT_ROOT>/hexstrike_rag_mcp_server.py"],
+      "env": {
+        "PYTHONPATH": "<PROJECT_ROOT>",
+        "HEXSTRIKE_USE_MOCK": "true"
+      },
+      "description": "HexStrike RAG (BM25+Qdrant pipeline; mock mode by default)",
+      "timeout": 60,
+      "disabled": false
+    }
+  }
+}
